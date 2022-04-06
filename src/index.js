@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import './index.css';
 import App from './App';
 
-ReactDOM.render(
+render(
   // eslint-disable-next-line react/jsx-filename-extension
   <React.StrictMode>
     <App />
