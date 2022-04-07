@@ -6,6 +6,7 @@ class Main extends Component {
   state = {
     novaTarefa: '',
     tarefas: [],
+    index: -1,
   };
 
   handleChange = (e) => {
@@ -16,7 +17,7 @@ class Main extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { tarefas } = this.state;
+    const { tarefas, index } = this.state;
     let { novaTarefa } = this.state;
 
     novaTarefa = novaTarefa.trim();
@@ -25,9 +26,18 @@ class Main extends Component {
 
     const novasTarefa = [...tarefas];
 
-    this.setState({
-      tarefas: [...novasTarefa, novaTarefa],
-    });
+    if (index === -1) {
+      this.setState({
+        tarefas: [...novasTarefa, novaTarefa],
+        novaTarefa: '',
+      });
+    } else {
+      novasTarefa[index] = novaTarefa;
+      this.setState({
+        tarefas: [...novasTarefa],
+        index: -1,
+      });
+    }
   };
 
   handleDelete = (e, index) => {
@@ -42,7 +52,12 @@ class Main extends Component {
   };
 
   handleEdit = (e, index) => {
-    console.log(index);
+    const { tarefas } = this.state;
+
+    this.setState({
+      index,
+      novaTarefa: tarefas[index],
+    });
   };
 
   render() {
